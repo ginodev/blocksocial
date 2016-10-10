@@ -54,6 +54,7 @@ class blocksocial extends Module
 			Configuration::updateValue('BLOCKSOCIAL_PINTEREST', '') &&
 			Configuration::updateValue('BLOCKSOCIAL_VIMEO', '') &&
 			Configuration::updateValue('BLOCKSOCIAL_INSTAGRAM', '') &&
+			Configuration::updateValue('BLOCKSOCIAL_LINKEDIN', '') &&
 			$this->registerHook('displayHeader') &&
 			$this->registerHook('displayFooter'));
 	}
@@ -69,6 +70,7 @@ class blocksocial extends Module
 			Configuration::deleteByName('BLOCKSOCIAL_PINTEREST') AND
 			Configuration::deleteByName('BLOCKSOCIAL_VIMEO') AND
 			Configuration::deleteByName('BLOCKSOCIAL_INSTAGRAM') AND
+			Configuration::deleteByName('BLOCKSOCIAL_LINKEDIN', '') AND
 			parent::uninstall());
 	}
 
@@ -86,6 +88,7 @@ class blocksocial extends Module
 			Configuration::updateValue('BLOCKSOCIAL_PINTEREST', Tools::getValue('blocksocial_pinterest', ''));
 			Configuration::updateValue('BLOCKSOCIAL_VIMEO', Tools::getValue('blocksocial_vimeo', ''));
 			Configuration::updateValue('BLOCKSOCIAL_INSTAGRAM', Tools::getValue('blocksocial_instagram', ''));
+			Configuration::updateValue('BLOCKSOCIAL_LINKEDIN', Tools::getValue('blocksocial_linkedin', ''));
 			$this->_clearCache('blocksocial.tpl');
 			Tools::redirectAdmin($this->context->link->getAdminLink('AdminModules').'&configure='.$this->name.'&tab_module='.$this->tab.'&conf=4&module_name='.$this->name);
 		}
@@ -110,6 +113,7 @@ class blocksocial extends Module
 				'pinterest_url' => Configuration::get('BLOCKSOCIAL_PINTEREST'),
 				'vimeo_url' => Configuration::get('BLOCKSOCIAL_VIMEO'),
 				'instagram_url' => Configuration::get('BLOCKSOCIAL_INSTAGRAM'),
+				'linkedin_url' => Configuration::get('BLOCKSOCIAL_LINKEDIN'),
 			));
 
 		return $this->display(__FILE__, 'blocksocial.tpl', $this->getCacheId());
@@ -172,6 +176,12 @@ class blocksocial extends Module
 						'name' => 'blocksocial_instagram',
 						'desc' => $this->l('Your official Instagram account.'),
 					),
+					array(						
+						'type' => 'text',						
+						'label' => $this->l('Linkedin URL:'),						
+						'name' => 'blocksocial_linkedin',						
+						'desc' => $this->l('Your official Linkedin account.'),					
+					),
 				),
 				'submit' => array(
 					'title' => $this->l('Save'),
@@ -209,6 +219,7 @@ class blocksocial extends Module
 			'blocksocial_pinterest' => Tools::getValue('blocksocial_pinterest', Configuration::get('BLOCKSOCIAL_PINTEREST')),
 			'blocksocial_vimeo' => Tools::getValue('blocksocial_vimeo', Configuration::get('BLOCKSOCIAL_VIMEO')),
 			'blocksocial_instagram' => Tools::getValue('blocksocial_instagram', Configuration::get('BLOCKSOCIAL_INSTAGRAM')),
+			'blocksocial_linkedin' => Tools::getValue('blocksocial_linkedin', Configuration::get('BLOCKSOCIAL_LINKEDIN')),
 		);
 	}
 
